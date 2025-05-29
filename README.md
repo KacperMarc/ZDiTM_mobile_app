@@ -1,4 +1,6 @@
 # ZDiTM_mobile_app
+Feel free to ask about the code :) It is not the mystery as some may think.
+
 Developing mobile application of ZDiTM public transport carrier.
 
 This project is about to wrap three key features, that various apps can offer, but none of those contains all of them in one place. 
