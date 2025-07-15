@@ -1,0 +1,623 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1BD9BCC32D7248D300A4756F /* StopsDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCC12D7248D300A4756F /* StopsDatabase.xcdatamodeld */; };
+		1BD9BCC42D7248D300A4756F /* StopsDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCC12D7248D300A4756F /* StopsDatabase.xcdatamodeld */; };
+		1BD9BCC52D7248D300A4756F /* StopsDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCC12D7248D300A4756F /* StopsDatabase.xcdatamodeld */; };
+		1BD9BCCC2D724F4C00A4756F /* Stops+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCCB2D724F4C00A4756F /* Stops+CoreDataProperties.swift */; };
+		1BD9BCCD2D724F4C00A4756F /* Stops+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCCA2D724F4C00A4756F /* Stops+CoreDataClass.swift */; };
+		1BD9BCCE2D724F4C00A4756F /* Stops+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCCB2D724F4C00A4756F /* Stops+CoreDataProperties.swift */; };
+		1BD9BCCF2D724F4C00A4756F /* Stops+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCCA2D724F4C00A4756F /* Stops+CoreDataClass.swift */; };
+		1BD9BCD02D724F4C00A4756F /* Stops+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCCB2D724F4C00A4756F /* Stops+CoreDataProperties.swift */; };
+		1BD9BCD12D724F4C00A4756F /* Stops+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD9BCCA2D724F4C00A4756F /* Stops+CoreDataClass.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1BCC0FB12D0E454700DCC8AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BCC0F922D0E454600DCC8AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BCC0F992D0E454600DCC8AD;
+			remoteInfo = zditmapp;
+		};
+		1BCC0FBB2D0E454700DCC8AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BCC0F922D0E454600DCC8AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BCC0F992D0E454600DCC8AD;
+			remoteInfo = zditmapp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1BCC0F9A2D0E454600DCC8AD /* zditmapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zditmapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BCC0FB02D0E454700DCC8AD /* zditmappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zditmappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BCC0FBA2D0E454700DCC8AD /* zditmappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zditmappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BD9BCC22D7248D300A4756F /* StopsDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StopsDatabase.xcdatamodel; sourceTree = "<group>"; };
+		1BD9BCCA2D724F4C00A4756F /* Stops+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Stops+CoreDataClass.swift"; path = "../zditmapp/Stops+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1BD9BCCB2D724F4C00A4756F /* Stops+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Stops+CoreDataProperties.swift"; path = "../zditmapp/Stops+CoreDataProperties.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1BCC0FC22D0E454700DCC8AD /* Exceptions for "zditmapp" folder in "zditmapp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1BCC0F992D0E454600DCC8AD /* zditmapp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1BCC0F9C2D0E454600DCC8AD /* zditmapp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1BCC0FC22D0E454700DCC8AD /* Exceptions for "zditmapp" folder in "zditmapp" target */,
+			);
+			path = zditmapp;
+			sourceTree = "<group>";
+		};
+		1BCC0FB32D0E454700DCC8AD /* zditmappTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = zditmappTests;
+			sourceTree = "<group>";
+		};
+		1BCC0FBD2D0E454700DCC8AD /* zditmappUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = zditmappUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1BCC0F972D0E454600DCC8AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BCC0FAD2D0E454700DCC8AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BCC0FB72D0E454700DCC8AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1BCC0F912D0E454600DCC8AD = {
+			isa = PBXGroup;
+			children = (
+				1BD9BCD22D72508200A4756F /* Database */,
+				1BCC0F9C2D0E454600DCC8AD /* zditmapp */,
+				1BCC0FB32D0E454700DCC8AD /* zditmappTests */,
+				1BCC0FBD2D0E454700DCC8AD /* zditmappUITests */,
+				1BCC0F9B2D0E454600DCC8AD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1BCC0F9B2D0E454600DCC8AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1BCC0F9A2D0E454600DCC8AD /* zditmapp.app */,
+				1BCC0FB02D0E454700DCC8AD /* zditmappTests.xctest */,
+				1BCC0FBA2D0E454700DCC8AD /* zditmappUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1BD9BCD22D72508200A4756F /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				1BD9BCCA2D724F4C00A4756F /* Stops+CoreDataClass.swift */,
+				1BD9BCCB2D724F4C00A4756F /* Stops+CoreDataProperties.swift */,
+				1BD9BCC12D7248D300A4756F /* StopsDatabase.xcdatamodeld */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1BCC0F992D0E454600DCC8AD /* zditmapp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BCC0FC32D0E454700DCC8AD /* Build configuration list for PBXNativeTarget "zditmapp" */;
+			buildPhases = (
+				1BCC0F962D0E454600DCC8AD /* Sources */,
+				1BCC0F972D0E454600DCC8AD /* Frameworks */,
+				1BCC0F982D0E454600DCC8AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1BCC0F9C2D0E454600DCC8AD /* zditmapp */,
+			);
+			name = zditmapp;
+			packageProductDependencies = (
+			);
+			productName = zditmapp;
+			productReference = 1BCC0F9A2D0E454600DCC8AD /* zditmapp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1BCC0FAF2D0E454700DCC8AD /* zditmappTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BCC0FC82D0E454700DCC8AD /* Build configuration list for PBXNativeTarget "zditmappTests" */;
+			buildPhases = (
+				1BCC0FAC2D0E454700DCC8AD /* Sources */,
+				1BCC0FAD2D0E454700DCC8AD /* Frameworks */,
+				1BCC0FAE2D0E454700DCC8AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BCC0FB22D0E454700DCC8AD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1BCC0FB32D0E454700DCC8AD /* zditmappTests */,
+			);
+			name = zditmappTests;
+			packageProductDependencies = (
+			);
+			productName = zditmappTests;
+			productReference = 1BCC0FB02D0E454700DCC8AD /* zditmappTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1BCC0FB92D0E454700DCC8AD /* zditmappUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BCC0FCB2D0E454700DCC8AD /* Build configuration list for PBXNativeTarget "zditmappUITests" */;
+			buildPhases = (
+				1BCC0FB62D0E454700DCC8AD /* Sources */,
+				1BCC0FB72D0E454700DCC8AD /* Frameworks */,
+				1BCC0FB82D0E454700DCC8AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BCC0FBC2D0E454700DCC8AD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1BCC0FBD2D0E454700DCC8AD /* zditmappUITests */,
+			);
+			name = zditmappUITests;
+			packageProductDependencies = (
+			);
+			productName = zditmappUITests;
+			productReference = 1BCC0FBA2D0E454700DCC8AD /* zditmappUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1BCC0F922D0E454600DCC8AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					1BCC0F992D0E454600DCC8AD = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					1BCC0FAF2D0E454700DCC8AD = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 1BCC0F992D0E454600DCC8AD;
+					};
+					1BCC0FB92D0E454700DCC8AD = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 1BCC0F992D0E454600DCC8AD;
+					};
+				};
+			};
+			buildConfigurationList = 1BCC0F952D0E454600DCC8AD /* Build configuration list for PBXProject "zditmapp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1BCC0F912D0E454600DCC8AD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1BCC0F9B2D0E454600DCC8AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1BCC0F992D0E454600DCC8AD /* zditmapp */,
+				1BCC0FAF2D0E454700DCC8AD /* zditmappTests */,
+				1BCC0FB92D0E454700DCC8AD /* zditmappUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1BCC0F982D0E454600DCC8AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BCC0FAE2D0E454700DCC8AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BCC0FB82D0E454700DCC8AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1BCC0F962D0E454600DCC8AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD9BCD02D724F4C00A4756F /* Stops+CoreDataProperties.swift in Sources */,
+				1BD9BCD12D724F4C00A4756F /* Stops+CoreDataClass.swift in Sources */,
+				1BD9BCC32D7248D300A4756F /* StopsDatabase.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BCC0FAC2D0E454700DCC8AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD9BCC42D7248D300A4756F /* StopsDatabase.xcdatamodeld in Sources */,
+				1BD9BCCE2D724F4C00A4756F /* Stops+CoreDataProperties.swift in Sources */,
+				1BD9BCCF2D724F4C00A4756F /* Stops+CoreDataClass.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BCC0FB62D0E454700DCC8AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD9BCC52D7248D300A4756F /* StopsDatabase.xcdatamodeld in Sources */,
+				1BD9BCCC2D724F4C00A4756F /* Stops+CoreDataProperties.swift in Sources */,
+				1BD9BCCD2D724F4C00A4756F /* Stops+CoreDataClass.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1BCC0FB22D0E454700DCC8AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BCC0F992D0E454600DCC8AD /* zditmapp */;
+			targetProxy = 1BCC0FB12D0E454700DCC8AD /* PBXContainerItemProxy */;
+		};
+		1BCC0FBC2D0E454700DCC8AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BCC0F992D0E454600DCC8AD /* zditmapp */;
+			targetProxy = 1BCC0FBB2D0E454700DCC8AD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1BCC0FC42D0E454700DCC8AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G4N4HDCW94;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = zditmapp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "ZDITM wymaga lokalizacji w celu wyświetlenia pojazdów i przystanków w okolicy.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = forbidden.zditmapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1BCC0FC52D0E454700DCC8AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G4N4HDCW94;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = zditmapp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "ZDITM wymaga lokalizacji w celu wyświetlenia pojazdów i przystanków w okolicy.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = forbidden.zditmapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1BCC0FC62D0E454700DCC8AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1BCC0FC72D0E454700DCC8AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1BCC0FC92D0E454700DCC8AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = forbidden.zditmappTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/zditmapp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/zditmapp";
+			};
+			name = Debug;
+		};
+		1BCC0FCA2D0E454700DCC8AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = forbidden.zditmappTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/zditmapp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/zditmapp";
+			};
+			name = Release;
+		};
+		1BCC0FCC2D0E454700DCC8AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = forbidden.zditmappUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = zditmapp;
+			};
+			name = Debug;
+		};
+		1BCC0FCD2D0E454700DCC8AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = forbidden.zditmappUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = zditmapp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1BCC0F952D0E454600DCC8AD /* Build configuration list for PBXProject "zditmapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BCC0FC62D0E454700DCC8AD /* Debug */,
+				1BCC0FC72D0E454700DCC8AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BCC0FC32D0E454700DCC8AD /* Build configuration list for PBXNativeTarget "zditmapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BCC0FC42D0E454700DCC8AD /* Debug */,
+				1BCC0FC52D0E454700DCC8AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BCC0FC82D0E454700DCC8AD /* Build configuration list for PBXNativeTarget "zditmappTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BCC0FC92D0E454700DCC8AD /* Debug */,
+				1BCC0FCA2D0E454700DCC8AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BCC0FCB2D0E454700DCC8AD /* Build configuration list for PBXNativeTarget "zditmappUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BCC0FCC2D0E454700DCC8AD /* Debug */,
+				1BCC0FCD2D0E454700DCC8AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1BD9BCC12D7248D300A4756F /* StopsDatabase.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1BD9BCC22D7248D300A4756F /* StopsDatabase.xcdatamodel */,
+			);
+			currentVersion = 1BD9BCC22D7248D300A4756F /* StopsDatabase.xcdatamodel */;
+			name = StopsDatabase.xcdatamodeld;
+			path = ../StopsDatabase.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1BCC0F922D0E454600DCC8AD /* Project object */;
+}
