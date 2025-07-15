@@ -22,7 +22,8 @@ This project is about to wrap three key features, that various apps can offer, b
 
 # 🔧 Architecture & Navigation
 
- The application follows the MVVM (Model-View-ViewModel) architectural pattern, ensuring a clean separation of concerns and easier testability and maintainability. Certain ViewModels are reused across the app, mapViewModel for instance.
+ * The application follows the MVVM (Model-View-ViewModel) architectural pattern, ensuring a clean separation of concerns and easier testability and maintainability. Certain ViewModels are reused across the app, mapViewModel for instance.
+ * Tab Bar-based navigation for intuitive switching between core app features like map, timetable, and routes section.
 
 # 📷 Showcase
 
