@@ -50,7 +50,6 @@ class StopInformationViewController: UIViewController {
         setupTableView()
         dataBinding()
         
-        // Set initial loading state
         isLoading = true
     }
     
@@ -341,7 +340,6 @@ class StopInformationViewController: UIViewController {
     }
     
     private func formatUpdateTime(_ dateString: String) -> String {
-        // Try to parse the updated_at string and format it nicely
         let formatter = ISO8601DateFormatter()
         if let date = formatter.date(from: dateString) {
             let displayFormatter = DateFormatter()
@@ -349,7 +347,6 @@ class StopInformationViewController: UIViewController {
             displayFormatter.dateStyle = .none
             return "Ostatnia aktualizacja: \(displayFormatter.string(from: date))"
         } else {
-            // Fallback if parsing fails
             return "Ostatnia aktualizacja: \(dateString)"
         }
     }
@@ -364,12 +361,9 @@ class StopInformationViewController: UIViewController {
                 self.isLoading = false
                 
                 if let departureTable = departureTable {
-                    // Update stop information
                     self.stopNameLabel.text = departureTable.stop_name
                     self.stopNumberLabel.text = "Przystanek \(departureTable.stop_number)"
-                    //self.lastUpdateLabel.text = self.formatUpdateTime(departureTable.updated_at)
                     
-                    // Handle API message if present
                     if let message = departureTable.message, !message.isEmpty {
                         self.messageLabel.text = message
                         self.messageLabel.isHidden = false
@@ -377,7 +371,6 @@ class StopInformationViewController: UIViewController {
                         self.messageLabel.isHidden = true
                     }
                     
-                    // Handle departures
                     let hasDepartures = !departureTable.departures.isEmpty
                     self.noDeparturesLabel.isHidden = hasDepartures
                     self.tableView.isHidden = !hasDepartures
@@ -385,22 +378,18 @@ class StopInformationViewController: UIViewController {
                     
                     if hasDepartures {
                         self.tableView.reloadData()
-                        // Update table view height constraint
                         let rowCount = min(departureTable.departures.count, 5)
-                        let tableHeight = CGFloat(rowCount * 70) // 70 is approximate row height
+                        let tableHeight = CGFloat(rowCount * 70) //
                         
-                        // Remove existing height constraint if any
                         self.tableView.constraints.forEach { constraint in
                             if constraint.firstAttribute == .height {
                                 constraint.isActive = false
                             }
                         }
                         
-                        // Add new height constraint
                         self.tableView.heightAnchor.constraint(equalToConstant: tableHeight).isActive = true
                     }
                 } else {
-                    // Handle case where departureTable is nil but no error occurred
                     self.stopNameLabel.text = "Brak danych"
                     self.noDeparturesLabel.isHidden = false
                     self.tableView.isHidden = true
@@ -412,7 +401,6 @@ class StopInformationViewController: UIViewController {
     }
 }
 
-// MARK: - Table View Data Source & Delegate
 extension StopInformationViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
