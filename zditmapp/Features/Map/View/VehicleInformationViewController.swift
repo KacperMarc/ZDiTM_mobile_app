@@ -247,7 +247,7 @@
      }
      
      @objc private func showOtherLineVehicles(){
-         print("jebac kurwy")
+         print("Inne linie")
      }
      
      // MARK: - Data Binding

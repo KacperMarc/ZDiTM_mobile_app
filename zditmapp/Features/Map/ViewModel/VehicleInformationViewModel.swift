@@ -41,9 +41,7 @@ final class VehicleInformationViewModel: ObservableObject {
                 
     }
     
-        // to nie dziala bo jak obiekt CUstomAnnotation zostanie raz przekazany to juz sie szajs nie aktualizuje razem z nim
-        // CustomAnnotation zwraca funkcja w MapViewModel
-        // i po kliknieciu w wannotacje przekazywany jest obiekt CustomAnnotation do VICV, powinno byc do VIVM
+    
         
     func updateData(from annotation: CustomAnnotation) {
             guard let vehicle = annotation.vehicle else {
