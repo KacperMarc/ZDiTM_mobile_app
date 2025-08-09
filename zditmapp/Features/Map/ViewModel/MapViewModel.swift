@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 import Combine
 
-final class MapViewModel: ObservableObject {
+class MapViewModel: ObservableObject {
     
     
      private let vehiclesService = FetchingVehicles()

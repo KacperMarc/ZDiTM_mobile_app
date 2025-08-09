@@ -12,23 +12,20 @@
      
      private let viewModel: VehicleInformationViewModel
      private var cancellables: Set<AnyCancellable> = []
+     
      private let scrollView = UIScrollView()
      private let contentView = UIView()
-     
-     // MARK: - UI Components
      private var headerLabel: UILabel!
      private var cardView: UIView!
      private var infoStackView: UIStackView!
      
-     // Info components
-     private var liniaView: InfoRowView!
-     private var aktualnyPrzystanekView: InfoRowView!
-     private var opoznienieView: InfoRowView!
-     private var pojazdView: InfoRowView!
-     private var rodzajView: InfoRowView!
-     private var biletomatView: InfoRowView!
+     private var lineRow: InfoRowView!
+     private var currentStopRow: InfoRowView!
+     private var delayRow: InfoRowView!
+     private var vehicleRow: InfoRowView!
+     private var vehicleTypeRow: InfoRowView!
+     private var ticketMachineRow: InfoRowView!
      
-     // MARK: - Initialization
      init(viewModel: VehicleInformationViewModel) {
          self.viewModel = viewModel
          super.init(nibName: nil, bundle: nil)
@@ -38,7 +35,6 @@
          fatalError("init(coder:) has not been implemented")
      }
      
-     // MARK: - Lifecycle
      override func viewDidLoad() {
          super.viewDidLoad()
          setupUI()
@@ -46,7 +42,6 @@
          dataBinding()
      }
      
-     // MARK: - UI Setup
      private func createFeatureButton(iconName: String, title: String?) -> UIButton {
          let button = UIButton(type: .system)
          button.addTarget(self, action: #selector(showOtherLineVehicles), for: .touchUpInside)
@@ -68,13 +63,11 @@
      private func setupUI() {
          view.backgroundColor = UIColor(red: 0.95, green: 0.97, blue: 1.0, alpha: 1.0)
          
-         // Setup scroll view
          scrollView.translatesAutoresizingMaskIntoConstraints = false
          contentView.translatesAutoresizingMaskIntoConstraints = false
          view.addSubview(scrollView)
          scrollView.addSubview(contentView)
          
-         // Header
          headerLabel = UILabel()
          headerLabel.text = "Informacje o pojeździe"
          headerLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -83,7 +76,6 @@
          headerLabel.translatesAutoresizingMaskIntoConstraints = false
          contentView.addSubview(headerLabel)
          
-         // Card view
          cardView = UIView()
          cardView.backgroundColor = .white
          cardView.layer.cornerRadius = 16
@@ -94,22 +86,20 @@
          cardView.translatesAutoresizingMaskIntoConstraints = false
          contentView.addSubview(cardView)
          
-         // Info rows
-         liniaView = createInfoRow(iconName: "line", title: "Linia", tintColor: UIColor.systemBlue)
-         aktualnyPrzystanekView = createInfoRow(iconName: "mappin", title: "Aktualny przystanek", tintColor: UIColor.systemGreen)
-         opoznienieView = createInfoRow(iconName: "clock", title: "Punktualność", tintColor: UIColor.systemOrange)
-         pojazdView = createInfoRow(iconName: viewModel.vehicleInformation!.vehicleImageName, title: "Pojazd", tintColor: UIColor.systemPurple)
-         rodzajView = createInfoRow(iconName: viewModel.vehicleInformation!.vehicleTypeImageName, title: "Rodzaj", tintColor: UIColor.systemIndigo)
-         biletomatView = createInfoRow(iconName: "tickets", title: "Biletomat", tintColor: UIColor.systemTeal)
+         lineRow = createInfoRow(iconName: "line", title: "Linia", tintColor: UIColor.systemBlue)
+         currentStopRow = createInfoRow(iconName: "mappin", title: "Aktualny przystanek", tintColor: UIColor.systemGreen)
+         delayRow = createInfoRow(iconName: "clock", title: "Punktualność", tintColor: UIColor.systemOrange)
+         vehicleRow = createInfoRow(iconName: viewModel.vehicleInformation!.vehicleImageName, title: "Pojazd", tintColor: UIColor.systemPurple)
+         vehicleTypeRow = createInfoRow(iconName: viewModel.vehicleInformation!.vehicleTypeImageName, title: "Rodzaj", tintColor: UIColor.systemIndigo)
+         ticketMachineRow = createInfoRow(iconName: "tickets", title: "Biletomat", tintColor: UIColor.systemTeal)
          
-         // Stack view for info rows
          infoStackView = UIStackView(arrangedSubviews: [
-             liniaView,
-             aktualnyPrzystanekView,
-             opoznienieView,
-             pojazdView,
-             rodzajView,
-             biletomatView
+             lineRow,
+             currentStopRow,
+             delayRow,
+             vehicleRow,
+             vehicleTypeRow,
+             ticketMachineRow
          ])
          infoStackView.axis = .vertical
          infoStackView.spacing = 16
@@ -118,7 +108,6 @@
          infoStackView.translatesAutoresizingMaskIntoConstraints = false
          cardView.addSubview(infoStackView)
          
-         // Additional features section
          let featuresLabel = UILabel()
          featuresLabel.text = "Udogodnienia"
          featuresLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
@@ -126,7 +115,6 @@
          featuresLabel.translatesAutoresizingMaskIntoConstraints = false
          contentView.addSubview(featuresLabel)
          
-         // Features container
          let featuresContainer = UIView()
          featuresContainer.backgroundColor = .white
          featuresContainer.layer.cornerRadius = 12
@@ -137,14 +125,9 @@
          featuresContainer.translatesAutoresizingMaskIntoConstraints = false
          contentView.addSubview(featuresContainer)
          
-         // Features stack - dwa przyciski z trajektoria tej linii i pojazdami
-         
-         
-         // będzie potrzebna zmiana w viewmodel żeby zwracała tylko id linii i jej nazwę żeby nie filtrować po stringach bo potem ta linia wyświetli tylko jej pojazdy
+         // there is a change in viewModel required which will return line id and its name to avoid filtering strings
          let showRoute = createFeatureButton(iconName: "mappin.and.ellipse", title: "Pojazdy tej linii")
          let showLineVehicles = createFeatureButton(iconName: "trasa", title: "Trasa przejazdu")
-         
-         
          
          let featuresStack = UIStackView(arrangedSubviews: [showRoute, showLineVehicles])
          featuresStack.axis = .horizontal
@@ -153,7 +136,6 @@
          featuresStack.translatesAutoresizingMaskIntoConstraints = false
          featuresContainer.addSubview(featuresStack)
          
-         // Constraints for features
          NSLayoutConstraint.activate([
              featuresLabel.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 24),
              featuresLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -172,30 +154,25 @@
      
      private func setupConstraints() {
          NSLayoutConstraint.activate([
-             // Scroll view constraints
              scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
              scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
              scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
              scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
              
-             // Content view constraints
              contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
              contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
              contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
              contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
              contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
              
-             // Header constraints
              headerLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
              headerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
              headerLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
              
-             // Card view constraints
              cardView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 16),
              cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
              cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
              
-             // Info stack view constraints
              infoStackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 20),
              infoStackView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
              infoStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
@@ -203,13 +180,12 @@
          ])
      }
      
-     // MARK: - Helper Methods
+     // helpers
      private func createInfoRow(iconName: String, title: String, tintColor: UIColor) -> InfoRowView {
          let infoRow = InfoRowView()
          infoRow.configure(iconName: iconName, title: title, tintColor: tintColor)
          return infoRow
      }
-     
      
      private func createFeatureView(iconName: String, title: String) -> UIView {
          let container = UIView()
@@ -249,36 +225,30 @@
      @objc private func showOtherLineVehicles(){
          print("Inne linie")
      }
-     
-     // MARK: - Data Binding
+
      private func dataBinding(){
          viewModel.$vehicleInformation
              .receive(on: DispatchQueue.main)
              .sink { [weak self] vehicleInformation in
                  guard let vehicleInformation = vehicleInformation else {return}
                  //labels
-                 //print(vehicleInformation.lineInfo)
-                 self?.liniaView.valueLabel.text = vehicleInformation.lineInfo
-                 self?.aktualnyPrzystanekView.valueLabel.text = vehicleInformation.stopInfo
-                 self?.opoznienieView.valueLabel.text = vehicleInformation.punctualityInfo
-                 self?.pojazdView.valueLabel.text = vehicleInformation.vehicleDetails
-                 self?.rodzajView.valueLabel.text = vehicleInformation.vehicleType
-                 self?.biletomatView.valueLabel.text = vehicleInformation.ticketMachineInfo
+                 self?.lineRow.valueLabel.text = vehicleInformation.lineInfo
+                 self?.currentStopRow.valueLabel.text = vehicleInformation.stopInfo
+                 self?.delayRow.valueLabel.text = vehicleInformation.punctualityInfo
+                 self?.vehicleRow.valueLabel.text = vehicleInformation.vehicleDetails
+                 self?.vehicleTypeRow.valueLabel.text = vehicleInformation.vehicleType
+                 self?.ticketMachineRow.valueLabel.text = vehicleInformation.ticketMachineInfo
                  //delay color
                  switch true {
                      case vehicleInformation.punctualityInfo.contains("Na czas"):
-                         self?.opoznienieView.valueLabel.textColor = .systemGreen
+                         self?.delayRow.valueLabel.textColor = .systemGreen
                      case vehicleInformation.punctualityInfo.contains("Przyspieszenie"):
-                         self?.opoznienieView.valueLabel.textColor = .systemBlue
+                         self?.delayRow.valueLabel.textColor = .systemBlue
                      case vehicleInformation.punctualityInfo.contains("Opóźnienie"):
-                         self?.opoznienieView.valueLabel.textColor = .systemRed
+                         self?.delayRow.valueLabel.textColor = .systemRed
                      default:
-                         self?.opoznienieView.valueLabel.textColor = .systemBlue
+                         self?.delayRow.valueLabel.textColor = .systemBlue
                  }
-                 //self?.pojazdImage.image = UIImage(named: vehicleInformation.vehicleImageName)
-                 //self?.rodzajImage.image = UIImage(named: vehicleInformation.vehicleTypeImageName)
-                 
-                 
              }
              .store(in: &cancellables)
      }

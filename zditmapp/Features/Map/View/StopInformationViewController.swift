@@ -3,23 +3,20 @@ import Combine
 
 class StopInformationViewController: UIViewController {
     
-    private var viewModel: StopInformationViewModel
+    var viewModel: StopInformationViewModel
     private var cancellables = Set<AnyCancellable>()
     
-    // MARK: - UI Components
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let headerCard = UIView()
     private let departuresCard = UIView()
     private let tableView = UITableView()
     
-    // Header components
     private var stopNameLabel: UILabel!
     private var stopNumberLabel: UILabel!
     private var lastUpdateLabel: UILabel!
     private var refreshButton: UIButton!
     
-    // Departures section
     private var departuresHeaderLabel: UILabel!
     private var noDeparturesLabel: UILabel!
     private var errorLabel: UILabel!
@@ -53,20 +50,16 @@ class StopInformationViewController: UIViewController {
         isLoading = true
     }
     
-    // MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = UIColor(red: 0.95, green: 0.97, blue: 1.0, alpha: 1.0)
         
-        // Setup scroll view
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        // Setup header card
         setupHeaderCard()
         
-        // Setup departures card
         setupDeparturesCard()
     }
     
@@ -80,7 +73,6 @@ class StopInformationViewController: UIViewController {
         headerCard.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(headerCard)
         
-        // Stop icon
         let stopIcon = UIImageView()
         stopIcon.image = UIImage(systemName: "bus.fill")
         stopIcon.tintColor = UIColor.systemBlue
@@ -88,7 +80,6 @@ class StopInformationViewController: UIViewController {
         stopIcon.translatesAutoresizingMaskIntoConstraints = false
         headerCard.addSubview(stopIcon)
         
-        // Stop name label
         stopNameLabel = UILabel()
         stopNameLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         stopNameLabel.textColor = .darkText
@@ -97,7 +88,6 @@ class StopInformationViewController: UIViewController {
         stopNameLabel.translatesAutoresizingMaskIntoConstraints = false
         headerCard.addSubview(stopNameLabel)
         
-        // Stop number label
         stopNumberLabel = UILabel()
         stopNumberLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         stopNumberLabel.textColor = .systemGray
@@ -105,15 +95,12 @@ class StopInformationViewController: UIViewController {
         stopNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         headerCard.addSubview(stopNumberLabel)
         
-        // Last update label
         lastUpdateLabel = UILabel()
         lastUpdateLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         lastUpdateLabel.textColor = .systemGray2
-        //lastUpdateLabel.text = "Ładowanie danych..."
         lastUpdateLabel.translatesAutoresizingMaskIntoConstraints = false
         headerCard.addSubview(lastUpdateLabel)
         
-        // Refresh button
         refreshButton = UIButton(type: .system)
         refreshButton.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
         refreshButton.tintColor = UIColor.systemBlue
@@ -121,9 +108,7 @@ class StopInformationViewController: UIViewController {
         refreshButton.layer.cornerRadius = 20
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
         refreshButton.addTarget(self, action: #selector(refreshTapped), for: .touchUpInside)
-       // headerCard.addSubview(refreshButton)
         
-        // Header constraints
         NSLayoutConstraint.activate([
             stopIcon.leadingAnchor.constraint(equalTo: headerCard.leadingAnchor, constant: 20),
             stopIcon.topAnchor.constraint(equalTo: headerCard.topAnchor, constant: 20),
@@ -141,11 +126,6 @@ class StopInformationViewController: UIViewController {
             lastUpdateLabel.leadingAnchor.constraint(equalTo: stopNameLabel.leadingAnchor),
             lastUpdateLabel.topAnchor.constraint(equalTo: stopNumberLabel.bottomAnchor, constant: 8),
             lastUpdateLabel.bottomAnchor.constraint(equalTo: headerCard.bottomAnchor, constant: -20),
-            
-           // refreshButton.trailingAnchor.constraint(equalTo: headerCard.trailingAnchor, constant: -20),
-           // refreshButton.centerYAnchor.constraint(equalTo: headerCard.centerYAnchor),
-           // refreshButton.widthAnchor.constraint(equalToConstant: 40),
-           // refreshButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
@@ -159,7 +139,6 @@ class StopInformationViewController: UIViewController {
         departuresCard.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(departuresCard)
         
-        // Departures header
         departuresHeaderLabel = UILabel()
         departuresHeaderLabel.text = "Najbliższe odjazdy"
         departuresHeaderLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
@@ -167,7 +146,6 @@ class StopInformationViewController: UIViewController {
         departuresHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         departuresCard.addSubview(departuresHeaderLabel)
         
-        // Schedule info label
         let scheduleInfoLabel = UILabel()
         scheduleInfoLabel.text = "według rozkładu jazdy"
         scheduleInfoLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -175,7 +153,6 @@ class StopInformationViewController: UIViewController {
         scheduleInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         departuresCard.addSubview(scheduleInfoLabel)
         
-        // Message label (for API messages)
         messageLabel = UILabel()
         messageLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         messageLabel.textColor = .systemOrange
@@ -185,12 +162,10 @@ class StopInformationViewController: UIViewController {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         departuresCard.addSubview(messageLabel)
         
-        // Loading indicator
         loadingIndicator = UIActivityIndicatorView(style: .medium)
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         departuresCard.addSubview(loadingIndicator)
         
-        // No departures label
         noDeparturesLabel = UILabel()
         noDeparturesLabel.text = "Brak dostępnych odjazdów"
         noDeparturesLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
@@ -200,7 +175,6 @@ class StopInformationViewController: UIViewController {
         noDeparturesLabel.translatesAutoresizingMaskIntoConstraints = false
         departuresCard.addSubview(noDeparturesLabel)
         
-        // Error label
         errorLabel = UILabel()
         errorLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         errorLabel.textColor = .systemRed
@@ -210,14 +184,12 @@ class StopInformationViewController: UIViewController {
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         departuresCard.addSubview(errorLabel)
         
-        // Table view setup
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         departuresCard.addSubview(tableView)
         
-        // Departures card constraints
         NSLayoutConstraint.activate([
             departuresHeaderLabel.topAnchor.constraint(equalTo: departuresCard.topAnchor, constant: 20),
             departuresHeaderLabel.leadingAnchor.constraint(equalTo: departuresCard.leadingAnchor, constant: 20),
@@ -259,25 +231,21 @@ class StopInformationViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // Scroll view constraints
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            // Content view constraints
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            // Header card constraints
             headerCard.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             headerCard.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             headerCard.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            // Departures card constraints
             departuresCard.topAnchor.constraint(equalTo: headerCard.bottomAnchor, constant: 16),
             departuresCard.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             departuresCard.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -285,7 +253,6 @@ class StopInformationViewController: UIViewController {
         ])
     }
     
-    // MARK: - Loading State Management
     private func updateLoadingState() {
         DispatchQueue.main.async {
             if self.isLoading {
@@ -315,21 +282,18 @@ class StopInformationViewController: UIViewController {
         }
     }
     
-    // MARK: - Actions
     @objc private func refreshTapped() {
         guard !isLoading else { return }
         
-        // Add refresh animation
+        // refresh animation
         let rotation = CABasicAnimation(keyPath: "transform.rotation")
         rotation.fromValue = 0
         rotation.toValue = Double.pi * 2
         rotation.duration = 1.0
         refreshButton.layer.add(rotation, forKey: "rotationAnimation")
         
-        // Start loading
         isLoading = true
         
-        // Call your async method
         Task {
             do {
                 try await viewModel.returnDepartureTable()
@@ -351,7 +315,6 @@ class StopInformationViewController: UIViewController {
         }
     }
     
-    // MARK: - Data Binding
     private func dataBinding() {
         viewModel.$departureTable
             .receive(on: DispatchQueue.main)
@@ -401,24 +364,3 @@ class StopInformationViewController: UIViewController {
     }
 }
 
-extension StopInformationViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return min(viewModel.departureTable?.departures.count ?? 0, 5)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DepartureCell", for: indexPath) as! DepartureTableViewCell
-        
-        if let departureTable = viewModel.departureTable, indexPath.row < departureTable.departures.count {
-            let departure = departureTable.departures[indexPath.row]
-            cell.configure(with: departure)
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-}

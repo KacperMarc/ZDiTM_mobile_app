@@ -9,7 +9,7 @@ import Foundation
 
 final class FetchingVehicles {
     
-     func getData() async throws -> [Vehicle] {
+    func getData() async throws -> [Vehicle] {
         let endpoint = "https://www.zditm.szczecin.pl/api/v1/vehicles"
         guard let url = URL(string: endpoint) else {
             

@@ -8,24 +8,19 @@
 import UIKit
 import MapKit
 
-
 extension MapViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchLineTextField{
             viewModel.showRequestedLine = true
             viewModel.showVehicles = false
-            
             updateMapView()
         }
-            
         return true
     }
 }
 
 extension MapViewController: CLLocationManagerDelegate{
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
@@ -42,16 +37,15 @@ extension MapViewController: MKMapViewDelegate {
     ) -> MKAnnotationView? {
 
         if let cluster = annotation as? MKClusterAnnotation {
-                    let clusterView = mapView.dequeueReusableAnnotationView(
-                        withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier
-                    ) as? ClusterAnnotationView
-                    clusterView?.annotation = cluster
-                    return clusterView
+            let clusterView = mapView.dequeueReusableAnnotationView(
+                withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier
+            ) as? ClusterAnnotationView
+            clusterView?.annotation = cluster
+            return clusterView
         }
         if let customVehicleAnnotation = annotation as? CustomAnnotation {
-            
             let reuseIdentifier = "customVehicleAnnotation"
-            //dequeueReusable po to aby to taki zbior widoków z ktorych pobiera sie takowy w celu np wyswietlenia ponownie z zaktulizowanymi danymi
+           
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? CustomVehicleView
             
             if annotationView == nil {
@@ -72,65 +66,47 @@ extension MapViewController: MKMapViewDelegate {
             let reuseIdentifier = "customStopAnnotation"
             
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? CustomStopView
+            
             if annotationView == nil {
                 annotationView = CustomStopView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            }else {
+            } else {
                 annotationView?.annotation = annotation
             }
             return annotationView
-            
         }
-        
-        
         return nil
     }
     
-    
-    
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)  {
         
-        
-        
         if let customVehicleAnnotation = view.annotation as? CustomAnnotation,
-                   let vehicleId = customVehicleAnnotation.vehicle?.vehicle_id {
-                    
-                    
-                    let vehicleInfoVM = VehicleInformationViewModel(vehicleId: vehicleId, mapViewModel: viewModel)
-                    let vehicleInfoVC = VehicleInformationViewController(viewModel: vehicleInfoVM)
-            vehicleInfoVC.modalPresentationStyle = .automatic
-
-                    if let sheet = vehicleInfoVC.sheetPresentationController {
-                        sheet.prefersGrabberVisible = true
-                        sheet.detents = [.medium()]
-                    }
-                    
-                    present(vehicleInfoVC, animated: true)
-                } else {
-                    
-                    print("Niepoprawny typ adnotacji.")
+           let vehicleId = customVehicleAnnotation.vehicle?.vehicle_id {
+                let vehicleInfoVM = VehicleInformationViewModel(vehicleId: vehicleId, mapViewModel: viewModel)
+                let vehicleInfoVC = VehicleInformationViewController(viewModel: vehicleInfoVM)
+                vehicleInfoVC.modalPresentationStyle = .automatic
+                
+                if let sheet = vehicleInfoVC.sheetPresentationController {
+                    sheet.prefersGrabberVisible = true
+                    sheet.detents = [.medium()]
                 }
-        if let customStopAnnotation = view.annotation as? CustomStop,
-                let stopNumber =
-                    
-                    customStopAnnotation.stop?.number {
-                    
-                    let stopInfoVM =  StopInformationViewModel(stopNumber: stopNumber)
-                    let stopInfoVC = StopInformationViewController(viewModel: stopInfoVM)
-                    stopInfoVC.modalPresentationStyle = .pageSheet
+                present(vehicleInfoVC, animated: true)
+        } else {
             
-                    if let sheet = stopInfoVC.sheetPresentationController {
-                        sheet.prefersGrabberVisible = true
-                        sheet.detents = [.medium()]
-                    }
-            
-                    present(stopInfoVC, animated: true)
-            
-                }
+            print("Niepoprawny typ adnotacji.")
         }
-       
-        
-      
+        if let customStopAnnotation = view.annotation as? CustomStop,
+           let stopNumber = customStopAnnotation.stop?.number {
+            let stopInfoVM =  StopInformationViewModel(stopNumber: stopNumber)
+            let stopInfoVC = StopInformationViewController(viewModel: stopInfoVM)
+            stopInfoVC.modalPresentationStyle = .pageSheet
+            
+            if let sheet = stopInfoVC.sheetPresentationController {
+                sheet.prefersGrabberVisible = true
+                sheet.detents = [.medium()]
+            }
+            present(stopInfoVC, animated: true)
+        }
+    }
 }
 
 

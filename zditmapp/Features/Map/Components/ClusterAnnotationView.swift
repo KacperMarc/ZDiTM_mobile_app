@@ -8,8 +8,6 @@ import MapKit
 
 class ClusterAnnotationView: MKAnnotationView {
     
-    
-    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         collisionMode = .circle
@@ -23,58 +21,55 @@ class ClusterAnnotationView: MKAnnotationView {
     override func prepareForDisplay() {
         super.prepareForDisplay()
         
-        // Ensure the annotation is a cluster
         guard let cluster = annotation as? MKClusterAnnotation else {
             return
         }
         
-        // Count the number of `CustomStop` annotations in the cluster
         let customStopCount = cluster.memberAnnotations.filter { $0 is CustomStop }.count
         
-        // Draw the cluster as a green circle with the count
         image = drawCluster(count: customStopCount)
     }
     
     private func drawCluster(count: Int) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: 80, height: 80))
         return renderer.image { context in
-            let cgContext = context.cgContext  // Pobranie CGContext
-
-            let center = CGPoint(x: 40, y: 40) // Środek koła
-            let radius: CGFloat = 35           // Promień koła (lekko większy, by efekt był lepszy)
-
+            let cgContext = context.cgContext
+            
+            let center = CGPoint(x: 40, y: 40)
+            let radius: CGFloat = 35
+            
             let colorSpace = CGColorSpaceCreateDeviceRGB()
             
             let greenColors: [CGColor] = [
-                    UIColor(red: 0.0, green: 0.5, blue: 0.0, alpha: 1).cgColor,
-                    UIColor(red: 0.0, green: 0.7, blue: 0.0, alpha: 0.6).cgColor,
-                    UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.2).cgColor,
-                    UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0).cgColor
-                ]
-
-                let yellowColors: [CGColor] = [
-                    UIColor(red: 0.5, green: 0.4, blue: 0.0, alpha: 1).cgColor,
-                    UIColor(red: 0.8, green: 0.7, blue: 0.0, alpha: 0.6).cgColor,
-                    UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 0.2).cgColor,
-                    UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 0).cgColor
-                ]
-
-                let orangeColors: [CGColor] = [
-                    UIColor(red: 0.6, green: 0.2, blue: 0.0, alpha: 1).cgColor,
-                    UIColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 0.6).cgColor,
-                    UIColor(red: 1.0, green: 0.7, blue: 0.2, alpha: 0.2).cgColor,
-                    UIColor(red: 1.0, green: 0.7, blue: 0.2, alpha: 0).cgColor
-                ]
+                UIColor(red: 0.0, green: 0.5, blue: 0.0, alpha: 1).cgColor,
+                UIColor(red: 0.0, green: 0.7, blue: 0.0, alpha: 0.6).cgColor,
+                UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.2).cgColor,
+                UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0).cgColor
+            ]
+            
+            let yellowColors: [CGColor] = [
+                UIColor(red: 0.5, green: 0.4, blue: 0.0, alpha: 1).cgColor,
+                UIColor(red: 0.8, green: 0.7, blue: 0.0, alpha: 0.6).cgColor,
+                UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 0.2).cgColor,
+                UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 0).cgColor
+            ]
+            
+            let orangeColors: [CGColor] = [
+                UIColor(red: 0.6, green: 0.2, blue: 0.0, alpha: 1).cgColor,
+                UIColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 0.6).cgColor,
+                UIColor(red: 1.0, green: 0.7, blue: 0.2, alpha: 0.2).cgColor,
+                UIColor(red: 1.0, green: 0.7, blue: 0.2, alpha: 0).cgColor
+            ]
             let selectedColors: [CGColor]
-                switch count {
+            switch count {
                 case 1...9:
                     selectedColors = greenColors
                 case 10...99:
                     selectedColors = yellowColors
                 default:
                     selectedColors = orangeColors
-                }
-            let locations: [CGFloat] = [0.0, 0.5, 0.8, 1.0] // Pozycje gradientu
+            }
+            let locations: [CGFloat] = [0.0, 0.5, 0.8, 1.0]
             
             if let gradient = CGGradient(colorsSpace: colorSpace, colors: selectedColors as CFArray, locations: locations) {
                 cgContext.drawRadialGradient(

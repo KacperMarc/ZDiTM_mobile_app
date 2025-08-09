@@ -8,20 +8,19 @@
 import MapKit
 
 
-final class CustomStopView: MKMarkerAnnotationView {
+class CustomStopView: MKMarkerAnnotationView {
     
     static let reuseID = "stopAnnotation"
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         clusteringIdentifier = "stop"
-
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func prepareForDisplay() {
         super.prepareForDisplay()
         displayPriority = .defaultHigh
@@ -29,6 +28,6 @@ final class CustomStopView: MKMarkerAnnotationView {
         glyphImage = .przystanek
     }
     
-        
+    
     
 }

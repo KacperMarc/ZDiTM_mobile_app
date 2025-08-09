@@ -12,7 +12,7 @@ import MapKit
 class FetchingTrajectory {
     
     
-     func getData(lineID: Int) async throws -> Data {
+    func getData(lineID: Int) async throws -> Data {
         
         let endpoint = "https://www.zditm.szczecin.pl/api/v1/trajectories/\(lineID)"
         print("called fetchTrajectory")
