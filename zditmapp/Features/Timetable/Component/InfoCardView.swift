@@ -7,12 +7,12 @@
 import UIKit
 
 class InfoCardView: UIView {
+    
     private let titleLabel = UILabel()
     private let contentLabel = UILabel()
     private let containerView = UIView()
     private var viewComponent: UIView?
-    
-    //flaga czy tworzyć content label
+    //bool parameter to decide whether create content section or not
     
     init(title: String, content: String?, viewComponent: UIView? = nil){
         super.init(frame: .zero)
@@ -86,6 +86,4 @@ class InfoCardView: UIView {
             ])
         }
     }
-
-    
 }

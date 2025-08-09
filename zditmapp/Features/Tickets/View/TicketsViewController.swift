@@ -8,12 +8,5 @@
 import UIKit
 
 class TicketsViewController: UIViewController {
-    
-    
-    
-    
-    
-
-    
 
 }

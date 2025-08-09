@@ -9,25 +9,20 @@ import Foundation
 import UIKit
 import Combine
 
-final class StopInformationViewModel: ObservableObject {
-    
-    
+class StopInformationViewModel: ObservableObject {
     
     private let tablesService = FetchingDepartureTables()
-    @Published var departureTable: DepartureTable?
     let stopNumber: String
+    @Published var departureTable: DepartureTable?
     
     init(stopNumber: String){
-       
         self.stopNumber = stopNumber
         print("VM\(self.stopNumber)")
         Task {
             try await returnDepartureTable()
-            
-
         }
     }
-    //musi byc update'owany zeby przekazywany czas do odjazdu byl na biezaco odswiezany
+    
     func returnDepartureTable() async throws {
         do{
             let departureTable = try await tablesService.getTable(number: stopNumber)
@@ -39,8 +34,6 @@ final class StopInformationViewModel: ObservableObject {
             print(error)
             throw error
         }
-        
-        
     }
-    
+    // MARK: - data binding required
 }

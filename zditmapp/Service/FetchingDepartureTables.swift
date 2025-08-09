@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FetchingDepartureTables {
+class FetchingDepartureTables {
     func getTable(number: String) async throws -> DepartureTable {
         
 

@@ -26,9 +26,9 @@ class ConnectionWidget: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func SetupUI(){}
-    
-    // MARK: - UI Components
+    private func SetupUI(){
+        
+    }
     
     lazy var departureArrivalStack: UIStackView = {
         
@@ -62,7 +62,4 @@ class ConnectionWidget: UIView {
         let stack = UIStackView()
         return stack
     }()
-    
-    
-    
 }

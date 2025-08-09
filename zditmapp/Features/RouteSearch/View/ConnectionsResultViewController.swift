@@ -8,10 +8,8 @@
 import UIKit
 
 class ConnectionsResultViewController: UITableViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
-        
     }
 }

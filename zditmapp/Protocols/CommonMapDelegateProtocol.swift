@@ -11,21 +11,21 @@ protocol CommonMapDelegate: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation
     ) -> MKAnnotationView?
 }
+
 extension CommonMapDelegate where Self: UIViewController  {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation
     ) -> MKAnnotationView? {
-
         if let cluster = annotation as? MKClusterAnnotation {
                     let clusterView = mapView.dequeueReusableAnnotationView(
                         withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier
                     ) as? ClusterAnnotationView
                     clusterView?.annotation = cluster
+            
                     return clusterView
         }
+        
         if let customVehicleAnnotation = annotation as? CustomAnnotation {
-            
             let reuseIdentifier = "customVehicleAnnotation"
-            //dequeueReusable po to aby to taki zbior widoków z ktorych pobiera sie takowy w celu np wyswietlenia ponownie z zaktulizowanymi danymi
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? CustomVehicleView
             
             if annotationView == nil {
@@ -40,22 +40,22 @@ extension CommonMapDelegate where Self: UIViewController  {
                 )
             }
             annotationView?.clusteringIdentifier = nil
+            
             return annotationView
         }
+        
         if let customStopAnnotation = annotation as? CustomStop {
             let reuseIdentifier = "customStopAnnotation"
             
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? CustomStopView
             if annotationView == nil {
                 annotationView = CustomStopView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            }else {
+            } else {
                 annotationView?.annotation = annotation
             }
-            return annotationView
             
+            return annotationView
         }
-        
-        
         return nil
     }
 }

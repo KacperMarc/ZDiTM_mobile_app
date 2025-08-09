@@ -36,7 +36,6 @@ struct Vehicle: Codable {
     let updated_at: String
 }
 
-
 struct VehiclesResponse: Codable {
     let data: [Vehicle]
 }

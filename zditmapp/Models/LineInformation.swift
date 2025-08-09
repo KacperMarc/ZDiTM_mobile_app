@@ -12,5 +12,4 @@ struct LineInformation: Codable {
     let przebieg: String
     let przystanki_do:[String]
     let przystanki_od: [String]
-    
 }

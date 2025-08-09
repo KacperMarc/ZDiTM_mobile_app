@@ -11,7 +11,6 @@ import Combine
 
 class MapViewModel: ObservableObject {
     
-    
      private let vehiclesService = FetchingVehicles()
      private let stopsService = FetchingStops()
     
@@ -24,12 +23,7 @@ class MapViewModel: ObservableObject {
      @Published var vehicleAnnotations: [CustomAnnotation] = []
      @Published var stopAnnotations: [CustomStop] = []
      
-    
-    
-    
-    
-    //vehicles
-    
+    // MARK: - vehicles
     func stopRequest() {
         timer?.invalidate()
         timer = nil
@@ -46,8 +40,6 @@ class MapViewModel: ObservableObject {
                 }
         }
         print("updated annotation on map")
-
-        
     }
     
     @MainActor
@@ -71,9 +63,7 @@ class MapViewModel: ObservableObject {
                                             pointer: existingAnnotation.vehicle?.bearing ?? 0
                                         )
                     }
-                    
                 }
-                 
                 let newAnnotationIDs = Set(newAnnotations.map { $0.vehicle?.vehicle_id })
                             for existingAnnotation in existingAnnotations {
                                 if !newAnnotationIDs.contains(existingAnnotation.vehicle?.vehicle_id) {
@@ -81,36 +71,27 @@ class MapViewModel: ObservableObject {
                                 }
                             }
             }
-            
-            
             print("Updated locations data")
             
         } catch {
             print("Error updating locations: \(error)")
         }
     }
-
-     func addVehicleAnnotations(on mapView: MKMapView, lineNumber: String? = nil) async throws {
+    
+    func addVehicleAnnotations(on mapView: MKMapView, lineNumber: String? = nil) async throws {
         do {
             try await returnVehicleAnnotations(lineNumber: lineNumber)
             DispatchQueue.main.async {
-                //retain cycle
+                //retain cycle?
                 mapView.addAnnotations(self.vehicleAnnotations)
             }
-            
-            
         } catch {
             throw error
         }
     }
 
-
-    
     private func returnVehicleAnnotations(lineNumber: String? = nil) async throws {
         do {
-            
-            
-            
             var vehicles = try await vehiclesService.getData()
 
             let lineNumbers: [String]? = lineNumber?
@@ -119,31 +100,27 @@ class MapViewModel: ObservableObject {
                 .filter { !$0.isEmpty }
             
             let filteredVehicles: [Vehicle]
+            
             if let lineNumbers = lineNumbers, !lineNumbers.isEmpty {
                 filteredVehicles = vehicles.filter { lineNumbers.contains($0.line_number) }
             } else {
                 filteredVehicles = vehicles
             }
-                
-            vehicles.removeAll()
+            
             let customAnnotations = filteredVehicles.map { vehicle -> CustomAnnotation in
                 let coordinate = CLLocationCoordinate2D(latitude: vehicle.latitude, longitude: vehicle.longitude)
-                
-                
                 return CustomAnnotation(coordinate: coordinate, vehicle: vehicle)
             }
-
+            
             self.vehicleAnnotations = customAnnotations
-            // od pewnego momentu nagle zwraca 2x aktualnych adnotacji, ponizej jest to printowane w ilosci aktualnej x2
-            // czyli zwraca 10 razy tyle adnotacji xd?
             print("Wszystkie pojazdy: \(vehicleAnnotations.count)")
         } catch {
             print("Błąd: \(error)")
             throw error
         }
     }
-    //stops
     
+    // MARK: - stops
     func addStopAnnotations(on mapView: MKMapView) async throws {
         do{
             try await returnStopAnnotations()
@@ -171,8 +148,5 @@ class MapViewModel: ObservableObject {
             print(error)
             throw error
         }
-        
-        
-        
     }
 }

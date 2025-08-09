@@ -7,12 +7,7 @@
 
 import Foundation
 
-
-
-
-
 struct Stop: Codable {
-    
     let id: Int
     let number: String
     let name: String
@@ -23,6 +18,7 @@ struct Stop: Codable {
     let railway_station_name: String?
     let updated_at: String
 }
+
 struct StopsResponse: Codable {
     let data: [Stop]
 }

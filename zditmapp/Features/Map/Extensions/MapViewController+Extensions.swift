@@ -41,13 +41,13 @@ extension MapViewController: MKMapViewDelegate {
                 withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier
             ) as? ClusterAnnotationView
             clusterView?.annotation = cluster
+            
             return clusterView
         }
+        
         if let customVehicleAnnotation = annotation as? CustomAnnotation {
             let reuseIdentifier = "customVehicleAnnotation"
-           
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? CustomVehicleView
-            
             if annotationView == nil {
                 annotationView = CustomVehicleView(annotation: annotation, reuseIdentifier: reuseIdentifier)
             } else {
@@ -60,25 +60,26 @@ extension MapViewController: MKMapViewDelegate {
                 )
             }
             annotationView?.clusteringIdentifier = nil
+            
             return annotationView
         }
+        
         if let customStopAnnotation = annotation as? CustomStop {
             let reuseIdentifier = "customStopAnnotation"
-            
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? CustomStopView
-            
             if annotationView == nil {
                 annotationView = CustomStopView(annotation: annotation, reuseIdentifier: reuseIdentifier)
             } else {
                 annotationView?.annotation = annotation
             }
+            
             return annotationView
         }
+        
         return nil
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)  {
-        
         if let customVehicleAnnotation = view.annotation as? CustomAnnotation,
            let vehicleId = customVehicleAnnotation.vehicle?.vehicle_id {
                 let vehicleInfoVM = VehicleInformationViewModel(vehicleId: vehicleId, mapViewModel: viewModel)
@@ -91,7 +92,6 @@ extension MapViewController: MKMapViewDelegate {
                 }
                 present(vehicleInfoVC, animated: true)
         } else {
-            
             print("Niepoprawny typ adnotacji.")
         }
         if let customStopAnnotation = view.annotation as? CustomStop,

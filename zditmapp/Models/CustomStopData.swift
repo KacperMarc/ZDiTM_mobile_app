@@ -6,8 +6,7 @@
 //
 import MapKit
 
-class CustomStop:NSObject, MKAnnotation{
-    
+class CustomStop:NSObject, MKAnnotation {
     
     var coordinate: CLLocationCoordinate2D
     var stop: Stop?

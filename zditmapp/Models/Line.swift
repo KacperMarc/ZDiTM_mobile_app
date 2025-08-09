@@ -18,6 +18,7 @@ struct Line: Codable {
     let sort_order: Int
     let updated_at: String
 }
+
 struct LinesResponse: Codable {
     let data: [Line]
 }

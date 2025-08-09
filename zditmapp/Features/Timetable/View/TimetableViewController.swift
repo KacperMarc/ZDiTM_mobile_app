@@ -22,26 +22,21 @@ class TimetableViewController: UIViewController {
         return label
     }()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addComponents()
         setupUI()
-        
     }
+    
     private func addComponents() {
-        
         Task {
-            do{
+            do {
                 await viewModel.addSection(on: contentStackView, onButtonTap: {[weak self] (lineNumber, lineId) in self?.goToLineDetails(lineNumber: lineNumber, lineId: lineId)})
             }
         }
-        
     }
+    
     private func setupUI() {
-        
-        
         view.backgroundColor = .white
         navigationItem.titleView = label
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,11 +65,11 @@ class TimetableViewController: UIViewController {
             contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
         ])
     }
+    
     private func goToLineDetails(lineNumber: String, lineId: Int) {
         let vm = LineInformationViewModel(number: lineId)
         let vc = LineInformationViewController(lineNumber: lineNumber, model: vm)
             vc.title = "Informacje o linii"
             navigationController?.pushViewController(vc, animated: true)
     }
-    
 }

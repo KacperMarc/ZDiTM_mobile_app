@@ -9,9 +9,7 @@
 import Foundation
 import CoreData
 
-
 extension Stops {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Stops> {
         return NSFetchRequest<Stops>(entityName: "Stops")
     }
@@ -30,9 +28,6 @@ extension Stops {
     @NSManaged public var number: String?
     @NSManaged public var id: Int32
     
-    
 }
 
-extension Stops : Identifiable {
-
-}
+extension Stops : Identifiable { }

@@ -30,10 +30,6 @@ class MainTabBarViewController: UITabBarController {
         vc4.title = "Zakłócenia"
         vc5.title = "Bilety"
         
-       /* tabBar.tintColor = UIColor(red: 245/255, green: 27/255, blue: 36/255, alpha: 1)
-        tabBar.barTintColor = .white
-        tabBar.backgroundColor = UIColor(red: 30/255, green: 56/255, blue: 140/255, alpha: 1)
-       */
         if #available(iOS 13.0, *) {
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithOpaqueBackground()
@@ -54,13 +50,8 @@ class MainTabBarViewController: UITabBarController {
             UITabBar.appearance().standardAppearance = tabBarAppearance
             UITabBar.appearance().tintColor = selectedItemColor 
         }
-
-
-        
         setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: true)
         selectedIndex = 2
     }
-    
-
 }
 

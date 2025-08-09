@@ -153,7 +153,7 @@ class MapViewController: UIViewController {
                     print("Błąd podczas dodawania przystanków: \(error)")
                 }
             }
-        } else{ removeStopsFromMap() }
+        } else { removeStopsFromMap() }
     }
 
     private func setupUI() {

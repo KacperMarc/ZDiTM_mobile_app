@@ -8,13 +8,7 @@
 import UIKit
 
 class InterruptionsViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
-    
-
-   
-
 }

@@ -230,7 +230,7 @@
          viewModel.$vehicleInformation
              .receive(on: DispatchQueue.main)
              .sink { [weak self] vehicleInformation in
-                 guard let vehicleInformation = vehicleInformation else {return}
+                 guard let vehicleInformation = vehicleInformation else { return }
                  //labels
                  self?.lineRow.valueLabel.text = vehicleInformation.lineInfo
                  self?.currentStopRow.valueLabel.text = vehicleInformation.stopInfo

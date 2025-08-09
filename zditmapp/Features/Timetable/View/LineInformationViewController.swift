@@ -16,7 +16,6 @@ class LineInformationViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
     
-    
     init(lineNumber: String, model: LineInformationViewModel) {
         self.model = model
         self.lineNumber = lineNumber
@@ -57,27 +56,25 @@ class LineInformationViewController: UIViewController {
             setupUI()
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         mapViewModel.stopRequest()
     }
     
     private func addRequestedAnnotations() async throws {
-        do{
+        do {
             try await mapViewModel.addVehicleAnnotations(on: mapView, lineNumber: lineNumber )
             mapViewModel.updateVehiclesOnMapView(mapView, lineNumber: lineNumber )
-
         }
-        catch{
+        catch {
             print(error)
             throw error
-            
         }
     }
 
     private func setupUI() {
         view.backgroundColor = .white
-
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         
@@ -94,13 +91,11 @@ class LineInformationViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-
         contentStackView.addArrangedSubview(lineLabel)
         addComponents(on: contentStackView)
         contentStackView.addArrangedSubview(mapView)
         Task {
             await model.addRoute(on: mapView)
-
         }
         NSLayoutConstraint.activate([
             mapView.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
@@ -116,8 +111,8 @@ class LineInformationViewController: UIViewController {
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16),
             contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
         ])
-        
     }
+    
     func addComponents(on stack: UIStackView) {
         stack.addArrangedSubview(self.directionsLabel)
         stack.addArrangedSubview(self.stopsStack)
@@ -128,6 +123,7 @@ class LineInformationViewController: UIViewController {
         label.text = "Przystanki na linii"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
+        
         return label
     }()
     
@@ -136,23 +132,20 @@ class LineInformationViewController: UIViewController {
         label.text = stopName
         label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         label.textColor = .black
+        
         return label
     }
-     func returnStopsTowards() -> [UILabel]{
+    
+    func returnStopsTowards() -> [UILabel]{
         return model.information?.przystanki_do.map { returnStopLabel(stopName: $0) } ?? []
-
     }
-     func returnStopsBackwards() -> [UILabel]{
+    func returnStopsBackwards() -> [UILabel]{
         return model.information?.przystanki_od.map { returnStopLabel(stopName: $0) } ?? []
-
     }
 
     private func returnStopsStack() -> UIStackView {
-        
         let leftLabels = returnStopsTowards()
         let rightLabels = returnStopsBackwards()
-        
-        
         
         let leftStackView = UIStackView()
         leftStackView.axis = .vertical

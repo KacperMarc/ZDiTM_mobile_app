@@ -8,16 +8,15 @@
 import Foundation
 import Combine
 
-class Environment{
+class Environment {
+    
     static let updateChanged = Notification.Name("EnvironmentChangedUpdate")
     static let shared = Environment()
-    
     private var sinks = [AnyCancellable]()
     var values = [Any]()
     
-    private init() {
-        
-    }
+    private init() { }
+    
     func register<T: ObservableObject>(_ value: T) {
         values.append(value)
         
@@ -28,14 +27,12 @@ class Environment{
         }
         sinks.append(sink)
     }
-    
 }
 
 protocol GlobalUpdating {
     func update()
-    
-    
 }
+
 extension GlobalUpdating {
     func registerForUpdates() {
         let mirror = Mirror(reflecting: self)
@@ -43,10 +40,8 @@ extension GlobalUpdating {
             if let result = child.value as? AnyGlobal {
                 NotificationCenter.default.addObserver(forName: Environment.updateChanged, object: result.anyWrappedValue, queue: .main) { _ in
                     self.update()
-                     
                 }
             }
-            
         }
         update()
     }
@@ -59,7 +54,7 @@ extension GlobalUpdating {
     init() {
         if let value = Environment.shared.values.first(where: { $0 is ObjectType}) as? ObjectType {
             self.wrappedValue = value
-        }else {
+        } else {
             fatalError("Missing type in environment")
         }
     }

@@ -8,7 +8,8 @@
 import Foundation
 import MapKit
 
-final class LineTrajectoryViewModel {
+class LineTrajectoryViewModel {
+    
     private let service = FetchingTrajectory()
     
     func addRouteToMap(on map: MKMapView, lineID: Int) async {
@@ -22,6 +23,7 @@ final class LineTrajectoryViewModel {
             print("Error fetching data: \(error)")
         }
     }
+    
     private func decode(_ data: Data) throws -> [MKPolyline] {
         let decoder = JSONDecoder()
                 let decodedData = try decoder.decode(GeoJSONResponse.self, from: data)
@@ -36,11 +38,12 @@ final class LineTrajectoryViewModel {
 
                 return polylines
     }
+    
     private func returnLineRoute(on map: MKMapView, polylines: [MKPolyline]) async{
         await MainActor.run {
             map.addOverlays(polylines)
-                    
                     var routeRect = MKMapRect.null
+            
                     for polyline in polylines {
                         routeRect = routeRect.union(polyline.boundingMapRect)
                     }

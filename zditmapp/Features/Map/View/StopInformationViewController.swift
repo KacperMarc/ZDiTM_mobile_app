@@ -52,14 +52,11 @@ class StopInformationViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = UIColor(red: 0.95, green: 0.97, blue: 1.0, alpha: 1.0)
-        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
         setupHeaderCard()
-        
         setupDeparturesCard()
     }
     
@@ -117,7 +114,6 @@ class StopInformationViewController: UIViewController {
             
             stopNameLabel.leadingAnchor.constraint(equalTo: stopIcon.trailingAnchor, constant: 16),
             stopNameLabel.topAnchor.constraint(equalTo: headerCard.topAnchor, constant: 20),
-            //stopNameLabel.trailingAnchor.constraint(equalTo: refreshButton.leadingAnchor, constant: -16),
             
             stopNumberLabel.leadingAnchor.constraint(equalTo: stopNameLabel.leadingAnchor),
             stopNumberLabel.topAnchor.constraint(equalTo: stopNameLabel.bottomAnchor, constant: 4),

@@ -6,8 +6,6 @@
 //
 import Foundation
 
-
-
 struct location: Codable {
     var id: String
     var coords: Coordinate

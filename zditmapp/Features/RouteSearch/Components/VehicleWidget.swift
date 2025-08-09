@@ -33,30 +33,27 @@ class VehicleWidget: UIView {
         if let titleIsNumber = Int(line) {
             switch titleIsNumber {
                 case 1...12:
-                return .tram(number: line)
+                    return .tram(number: line)
                 case 51...244:
                     return .bus(number: line)
                 case 904...909:
-                return .bus(number: line)
-                
+                    return .bus(number: line)
                 case 521...536:
-                return .nightBus(number: line)
-                
+                    return .nightBus(number: line)
                 default:
-                return .unknown(number: line)
+                    return .unknown(number: line)
             }
-        }else {
+        } else {
             switch line.uppercased() {
-            case "A", "B", "C":
-                return .bus(number: line)
+                case "A", "B", "C":
+                    return .bus(number: line)
             
-            default:
-                return .unknown(number: line)
-            }
+                default:
+                    return .unknown(number: line)
             }
         }
+    }
 
-    
     enum TransportType {
         case bus(number: String)
         case fastBus(number: String)
@@ -88,8 +85,8 @@ class VehicleWidget: UIView {
         }
         
     }
-    // MARK: - UI Components
     
+    // MARK: - UI Components
     lazy var transportIconView: UIImageView = {
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -105,7 +102,6 @@ class VehicleWidget: UIView {
         return label
     }()
     
-    
     lazy var widgetStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [transportIconView, lineNumber])
         stack.axis = .horizontal
@@ -113,6 +109,7 @@ class VehicleWidget: UIView {
 
         return stack
     }()
+    
     func SetupUI(){
         
     }
