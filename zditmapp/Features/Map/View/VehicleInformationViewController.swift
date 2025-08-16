@@ -101,6 +101,7 @@
              vehicleTypeRow,
              ticketMachineRow
          ])
+         
          infoStackView.axis = .vertical
          infoStackView.spacing = 16
          infoStackView.distribution = .fill
@@ -127,7 +128,7 @@
          
          // there is a change in viewModel required which will return line id and its name to avoid filtering strings
          let showRoute = createFeatureButton(iconName: "mappin.and.ellipse", title: "Pojazdy tej linii")
-         let showLineVehicles = createFeatureButton(iconName: "trasa", title: "Trasa przejazdu")
+         let showLineVehicles = createFeatureButton(iconName: "route", title: "Trasa przejazdu")
          
          let featuresStack = UIStackView(arrangedSubviews: [showRoute, showLineVehicles])
          featuresStack.axis = .horizontal

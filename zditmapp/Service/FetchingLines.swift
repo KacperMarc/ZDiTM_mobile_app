@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class FetchingLines {
     
     private let endpoint = URL(string: "https://www.zditm.szczecin.pl/api/v1/lines")

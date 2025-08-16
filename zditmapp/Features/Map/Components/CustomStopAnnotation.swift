@@ -25,7 +25,7 @@ class CustomStopView: MKMarkerAnnotationView {
         super.prepareForDisplay()
         displayPriority = .defaultHigh
         markerTintColor = UIColor(red: 30/255, green: 56/255, blue: 140/255, alpha: 1)
-        glyphImage = .przystanek
+        glyphImage = .stop
     }
     
     

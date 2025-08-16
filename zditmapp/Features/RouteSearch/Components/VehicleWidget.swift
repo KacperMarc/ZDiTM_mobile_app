@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 
 class VehicleWidget: UIView {
+    
     private let line: String
     private let isWalk: Bool?
     private let meters: Int?
@@ -28,7 +29,7 @@ class VehicleWidget: UIView {
     
     func detectTransportType(from line: String, isWalk: Bool, meters: String) -> TransportType {
         
-        if(isWalk) {  return .walk(meters: meters)  }
+        if isWalk {  return .walk(meters: meters)  }
         
         if let titleIsNumber = Int(line) {
             switch titleIsNumber {
@@ -73,6 +74,7 @@ class VehicleWidget: UIView {
                     
             }
         }
+        
         var iconColor: UIColor {
             switch self {
                 case .bus:  return UIColor(red: 130/255, green: 188/255, blue: 0/255, alpha: 1)
@@ -83,7 +85,6 @@ class VehicleWidget: UIView {
                 case .unknown: return .systemGray
             }
         }
-        
     }
     
     // MARK: - UI Components
@@ -113,5 +114,4 @@ class VehicleWidget: UIView {
     func SetupUI(){
         
     }
-    
 }

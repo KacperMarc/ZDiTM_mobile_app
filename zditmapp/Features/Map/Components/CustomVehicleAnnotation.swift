@@ -24,46 +24,40 @@ class CustomVehicleView: MKAnnotationView {
     }
     
     private func drawAnnotation(lineNumber: String?, delay: Int, pointerAngle: Int?) -> UIImage {
-        
         func returnLineColor(lineNumber: String!) -> UIColor {
-            
             if let lineIsNumber = Int(lineNumber!) {
                 switch lineIsNumber {
-                case 1...11:
-                    return UIColor(red: 0/255, green: 159/255, blue: 227/255, alpha: 1)
-                case 51...244:
-                    return UIColor(red: 130/255, green: 188/255, blue: 0/255, alpha: 1)
-                case 521...536:
-                    return .black
-                default:
-                    return .gray
+                    case 1...11:
+                        return UIColor(red: 0/255, green: 159/255, blue: 227/255, alpha: 1)
+                    case 51...244:
+                        return UIColor(red: 130/255, green: 188/255, blue: 0/255, alpha: 1)
+                    case 521...536:
+                        return .black
+                    default:
+                        return .gray
                 }
-            }
-            else {
+            } else {
                 switch lineNumber!.uppercased() {
-                case "A", "B", "C":
-                    return UIColor(red: 227/255, green: 6/255, blue: 19/255, alpha: 1)
-                default :
-                    return .gray
+                    case "A", "B", "C":
+                        return UIColor(red: 227/255, green: 6/255, blue: 19/255, alpha: 1)
+                    default :
+                        return .gray
                 }
             }
         }
+        
         func returnDelayColor() -> UIColor {
             return delay < 0 ? .red : .systemGreen
         }
         
         let lineColor = returnLineColor(lineNumber: lineNumber!)
-        
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: 70, height:70))
+        
         return renderer.image { _ in
             let center = CGPoint(x: 35, y: 35)
-            
             UIBezierPath(ovalIn: CGRect(x: 5, y: 5, width: 60, height: 60)).fill()
-            
             lineColor.setFill()
             UIBezierPath(ovalIn: CGRect(x: 5, y: 5, width: 60, height: 60)).fill()
-            
-    
             UIColor.white.setFill()
             UIBezierPath(ovalIn: CGRect(x: 10, y: 10, width: 50, height: 50)).fill()
             
@@ -91,7 +85,7 @@ class CustomVehicleView: MKAnnotationView {
             let text2Rect = CGRect(x: center.x - text2Size.width / 2,
                                    y: textRect.maxY + 2,
                                    width: text2Size.width, height: text2Size.height)
-            
+            // extract to external method drawText
             text.draw(in: textRect, withAttributes: attributes)
             text2.draw(in: text2Rect, withAttributes: attributesSmall)
             

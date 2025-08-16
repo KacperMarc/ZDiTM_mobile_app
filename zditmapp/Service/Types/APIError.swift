@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ZDITMError: Error {
+enum APIError: Error {
     case invalidURL
     case invalidResponse
     case invalidData
