@@ -13,12 +13,12 @@ class FetchingDepartureTables {
 
         let endpoint = "https://www.zditm.szczecin.pl/api/v1/displays/\(number)"
         
-        guard let url = URL(string: endpoint) else { throw ZDITMError.invalidURL }
+        guard let url = URL(string: endpoint) else { throw APIError.invalidURL }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw ZDITMError.invalidResponse }
+            throw APIError.invalidResponse }
         
         do {
             let decoder = JSONDecoder()
@@ -26,7 +26,7 @@ class FetchingDepartureTables {
             return tableResponse
             }
         catch {
-            throw ZDITMError.invalidData
+            throw APIError.invalidData
         }
     }
 }

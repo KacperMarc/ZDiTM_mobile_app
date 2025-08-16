@@ -16,7 +16,7 @@ class FetchingRoutes{
         let endpointPost = "https://api.traveltimeapp.com/v4/routes"
         
         guard let url = URL(string: endpointPost) else {
-            throw ZDITMError.invalidURL
+            throw APIError.invalidURL
         }
         
         var request = URLRequest(url: url)

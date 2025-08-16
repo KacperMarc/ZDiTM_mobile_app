@@ -7,10 +7,16 @@
 
 import Foundation
 
-struct ApiClient {
+struct APIClient {
+    
+    func getVehicles() async throws -> [Vehicle] {
+        let vehicleResponse: VehiclesResponse = try await APIClient.fetchData(from: .vehicles)
+        let vehicles = vehicleResponse.data
+        return vehicles
+    }
     
     func getDepartureTable(number: String) async throws -> DepartureTable {
-        let departureTable: DepartureTable = try await ApiClient.fetchData(from: .table(number))
+        let departureTable: DepartureTable = try await APIClient.fetchData(from: .table(number))
         return departureTable
     }
         

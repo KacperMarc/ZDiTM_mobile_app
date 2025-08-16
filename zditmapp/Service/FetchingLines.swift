@@ -12,12 +12,12 @@ class FetchingLines {
     private let endpoint = URL(string: "https://www.zditm.szczecin.pl/api/v1/lines")
     
     func getData() async throws -> [Line] {
-        guard let url = endpoint else { throw ZDITMError.invalidURL }
+        guard let url = endpoint else { throw APIError.invalidURL }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw ZDITMError.invalidResponse
+            throw APIError.invalidResponse
         }
         
         return try JSONDecoder().decode(LinesResponse.self, from: data).data

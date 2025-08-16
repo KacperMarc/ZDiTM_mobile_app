@@ -15,12 +15,12 @@ class FetchingLineInformation {
 
         guard let url = URL(string: endpoint) else {
             
-            throw ZDITMError.invalidURL }
+            throw APIError.invalidURL }
             
             let (data, response) = try await URLSession.shared.data(from: url)
             
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                throw ZDITMError.invalidResponse
+                throw APIError.invalidResponse
             }
 
             return try JSONDecoder().decode(LineInformation.self, from: data)

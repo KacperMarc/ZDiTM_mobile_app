@@ -13,11 +13,11 @@ final class FetchingVehicles {
         let endpoint = "https://www.zditm.szczecin.pl/api/v1/vehicles"
         guard let url = URL(string: endpoint) else {
             
-            throw ZDITMError.invalidURL }
+            throw APIError.invalidURL }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { throw ZDITMError.invalidResponse }
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { throw APIError.invalidResponse }
         
         do {
             let decoder = JSONDecoder()
@@ -25,7 +25,7 @@ final class FetchingVehicles {
             return vehiclesResponse.data
             
         } catch {
-            throw ZDITMError.invalidData
+            throw APIError.invalidData
         }
         
     }

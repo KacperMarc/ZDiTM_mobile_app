@@ -11,7 +11,7 @@ import Combine
 
 class StopInformationViewModel: ObservableObject {
     
-    private let tablesService = FetchingDepartureTables()
+    private let apiClient = ApiClient()
     let stopNumber: String
     @Published var departureTable: DepartureTable?
     
@@ -25,7 +25,7 @@ class StopInformationViewModel: ObservableObject {
     
     func returnDepartureTable() async throws {
         do{
-            let departureTable = try await tablesService.getTable(number: stopNumber)
+            let departureTable = try await apiClient.getDepartureTable(number: stopNumber)
             DispatchQueue.main.async {
                 self.departureTable = departureTable
             }
