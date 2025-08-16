@@ -7,13 +7,28 @@
 
 import Foundation
 
-enum APIEndpoint {
+enum APIEndpoint: Endpoint {
     private static let zditmURL = URL(string: "https://www.zditm.szczecin.pl/api/v1")!
     
-    case stops, table(String), lines, vehicles, trajectories(Int)
+    case stops, table(String), lines, vehicles //trajectories(Int)
     
     var request: URLRequest {
         URLRequest(url: url)
+    }
+    
+    var responseType: Decodable.Type {
+        switch self {
+        case .stops:
+            return StopsResponse.self
+        case .table:
+            return DepartureTable.self
+        case .lines:
+            return LinesResponse.self
+        case .vehicles:
+            return VehiclesResponse.self
+       // case .trajectories:
+           // return Traject.self
+        }
     }
     
     private var url: URL {
@@ -30,8 +45,8 @@ enum APIEndpoint {
             return "/lines"
         case .vehicles:
             return "/vehicles"
-        case .trajectories(let lineID):
-            return "/trajectories/\(lineID)"
+        //case .trajectories(let lineID):
+            //return "/trajectories/\(lineID)"
         }
     }
     

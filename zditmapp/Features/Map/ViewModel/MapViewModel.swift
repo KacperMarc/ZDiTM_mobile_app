@@ -13,7 +13,7 @@ class MapViewModel: ObservableObject {
     
      private let vehiclesService = FetchingVehicles()
      private let stopsService = FetchingStops()
-     private let apiClient = ApiClient()
+     private let apiClient = APIClient()
     
      var locationManager: CLLocationManager?
      var timer: Timer?

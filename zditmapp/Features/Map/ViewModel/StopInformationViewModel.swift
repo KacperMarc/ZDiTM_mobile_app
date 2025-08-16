@@ -11,7 +11,7 @@ import Combine
 
 class StopInformationViewModel: ObservableObject {
     
-    private let apiClient = ApiClient()
+    private let apiClient = APIClient()
     let stopNumber: String
     @Published var departureTable: DepartureTable?
     
