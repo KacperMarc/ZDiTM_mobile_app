@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FetchingRoutes{
+struct FetchingRoutes{
     
     static func fetchRoutes(_ connectionType: String, _ originLat: Float, _ originLng: Float,_ destLat: Float, _ destLng: Float, _ departureTime: String, _ appId: String, _ apiKey: String) async throws -> RouteResults {
         

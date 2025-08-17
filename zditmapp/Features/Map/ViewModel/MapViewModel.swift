@@ -11,9 +11,6 @@ import Combine
 
 class MapViewModel: ObservableObject {
     
-     private let vehiclesService = FetchingVehicles()
-     private let stopsService = FetchingStops()
-    
      var locationManager: CLLocationManager?
      var timer: Timer?
      var showVehicles = false
@@ -123,29 +120,28 @@ class MapViewModel: ObservableObject {
     
     // MARK: - stops
     func addStopAnnotations(on mapView: MKMapView) async throws {
-        do{
+        do {
             try await returnStopAnnotations()
             DispatchQueue.main.async {
                 mapView.addAnnotations(self.stopAnnotations)
             }
-        }
-        catch {
+        } catch {
             print(error)
             throw error
         }
     }
     
     func returnStopAnnotations() async throws {
-        do{
-            let stops = try await stopsService.getData()
+        do {
+            let stopsResponse: StopsResponse = try await APIClient.request(from: APIEndpoint.stops)
+            let stops = stopsResponse.data
             let customAnnotations = stops.map {
                 stop -> CustomStop in
                 let coordinate = CLLocationCoordinate2D(latitude: stop.latitude, longitude: stop.longitude)
                 return CustomStop(coordinate: coordinate, stop: stop)
             }
             self.stopAnnotations = customAnnotations
-        }
-        catch {
+        } catch {
             print(error)
             throw error
         }

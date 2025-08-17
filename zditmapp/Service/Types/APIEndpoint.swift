@@ -10,8 +10,9 @@ import Foundation
 enum APIEndpoint: Endpoint {
     private static let zditmURL = URL(string: "https://www.zditm.szczecin.pl/api/v1")!
     private static let scrapeURL = URL(string: "http://127.0.0.1:3000/scrape")!
+    private static let routesURL = URL(string: "https://api.traveltimeapp.com/v4/routes")!
     
-    case stops, table(String), lines, vehicles, trajectories(Int)
+    case stops, table(String), lines, lineInformation(Int), vehicles, trajectories(Int)
     
     var request: URLRequest {
         URLRequest(url: url)
@@ -25,6 +26,8 @@ enum APIEndpoint: Endpoint {
             return DepartureTable.self
         case .lines:
             return LinesResponse.self
+        case .lineInformation:
+            return LineInformation.self
         case .vehicles:
             return VehiclesResponse.self
         case .trajectories:
@@ -44,6 +47,8 @@ enum APIEndpoint: Endpoint {
             return "/displays/\(number)"
         case .lines:
             return "/lines"
+        case .lineInformation(let number):
+            return "/\(number)"
         case .vehicles:
             return "/vehicles"
         case .trajectories(let lineID):

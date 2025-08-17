@@ -16,7 +16,7 @@ struct APIClient {
         return data
     }
         
-    private static func fetchData(from endpoint: Endpoint) async throws -> Decodable {
+    static func fetchData(from endpoint: Endpoint) async throws -> Decodable {
         let (data, response) = try await URLSession.shared.data(for: endpoint.request)
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {

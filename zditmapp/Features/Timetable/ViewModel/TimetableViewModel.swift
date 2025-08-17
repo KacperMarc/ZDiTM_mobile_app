@@ -10,7 +10,6 @@ import UIKit
 
 class TimetableViewModel: ObservableObject {
     
-    private let service = FetchingLines()
     @Published var mappedLines: [String: [Line]] = [:]
 
     func addSection(on view: UIStackView, onButtonTap: @escaping (String, Int) -> Void) async {
@@ -26,7 +25,8 @@ class TimetableViewModel: ObservableObject {
     
     func returnMappedLines(completion: @escaping () -> Void) async {
         do {
-            let lines = try await service.getData()
+            let linesResponse: LinesResponse = try await APIClient.request(from: APIEndpoint.lines)
+            let lines = linesResponse.data
             print("calledFetch")
 
             DispatchQueue.main.async {
