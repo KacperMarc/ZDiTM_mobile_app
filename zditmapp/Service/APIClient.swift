@@ -9,19 +9,14 @@ import Foundation
 
 struct APIClient {
     
-    func getVehicles() async throws -> [Vehicle] {
-        let vehicleResponse: VehiclesResponse = try await APIClient.fetchData(from: APIEndpoint.vehicles) as! VehiclesResponse
-        let vehicles = vehicleResponse.data
-        return vehicles
-    }
-    
-    func getDepartureTable(number: String) async throws -> DepartureTable {
-        let departureTable: DepartureTable = try await APIClient.fetchData(from: APIEndpoint.table(number)) as! DepartureTable
-        return departureTable
+    static func request<T: Decodable>(from endpoint: APIEndpoint, as type: T.Type = T.self) async throws -> T {
+        guard let data = try await fetchData(from: endpoint) as? T else {
+            throw APIError.invalidData
+        }
+        return data
     }
         
-    static func fetchData(from endpoint: Endpoint) async throws -> Decodable {
-        
+    private static func fetchData(from endpoint: Endpoint) async throws -> Decodable {
         let (data, response) = try await URLSession.shared.data(for: endpoint.request)
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {

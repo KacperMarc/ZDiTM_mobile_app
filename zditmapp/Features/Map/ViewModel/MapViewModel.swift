@@ -13,7 +13,6 @@ class MapViewModel: ObservableObject {
     
      private let vehiclesService = FetchingVehicles()
      private let stopsService = FetchingStops()
-     private let apiClient = APIClient()
     
      var locationManager: CLLocationManager?
      var timer: Timer?
@@ -93,7 +92,8 @@ class MapViewModel: ObservableObject {
 
     private func returnVehicleAnnotations(lineNumber: String? = nil) async throws {
         do {
-            let vehicles = try await apiClient.getVehicles()
+            let vehicleResponse: VehiclesResponse = try await APIClient.request(from: APIEndpoint.vehicles)
+            let vehicles = vehicleResponse.data
 
             let lineNumbers: [String]? = lineNumber?
                 .components(separatedBy: " ")

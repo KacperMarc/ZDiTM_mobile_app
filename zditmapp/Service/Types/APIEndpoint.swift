@@ -9,8 +9,9 @@ import Foundation
 
 enum APIEndpoint: Endpoint {
     private static let zditmURL = URL(string: "https://www.zditm.szczecin.pl/api/v1")!
+    private static let scrapeURL = URL(string: "http://127.0.0.1:3000/scrape")!
     
-    case stops, table(String), lines, vehicles //trajectories(Int)
+    case stops, table(String), lines, vehicles, trajectories(Int)
     
     var request: URLRequest {
         URLRequest(url: url)
@@ -26,8 +27,8 @@ enum APIEndpoint: Endpoint {
             return LinesResponse.self
         case .vehicles:
             return VehiclesResponse.self
-       // case .trajectories:
-           // return Traject.self
+        case .trajectories:
+            return GeoJSONResponse.self
         }
     }
     
@@ -45,8 +46,8 @@ enum APIEndpoint: Endpoint {
             return "/lines"
         case .vehicles:
             return "/vehicles"
-        //case .trajectories(let lineID):
-            //return "/trajectories/\(lineID)"
+        case .trajectories(let lineID):
+            return "/trajectories/\(lineID)"
         }
     }
     
