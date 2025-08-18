@@ -11,15 +11,15 @@ import Combine
 
 class MapViewModel: ObservableObject {
     
-     var locationManager: CLLocationManager?
-     var timer: Timer?
-     var showVehicles = false
-     var showRequestedLine = false
-     var showStops = false
-     var showVehicleDetails = false
-     @Published var vehicleAnnotations: [CustomAnnotation] = []
-     @Published var stopAnnotations: [CustomStop] = []
-     
+    var locationManager: CLLocationManager?
+    var timer: Timer?
+    var showVehicles = false
+    var showRequestedLine = false
+    var showStops = false
+    var showVehicleDetails = false
+    @Published var vehicleAnnotations: [CustomAnnotation] = []
+    @Published var stopAnnotations: [CustomStop] = []
+    
     // MARK: - vehicles
     func stopRequest() {
         timer?.invalidate()
@@ -31,10 +31,10 @@ class MapViewModel: ObservableObject {
     func updateVehiclesOnMapView(_ mapView: MKMapView, lineNumber: String?) {
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
-                    Task {
-                        try await self?.updateVehicleDataAnnotations(on: (mapView), lineNumber: lineNumber)
-                    }
+                Task {
+                    try await self?.updateVehicleDataAnnotations(on: (mapView), lineNumber: lineNumber)
                 }
+            }
         }
         print("updated annotation on map")
     }
@@ -45,7 +45,7 @@ class MapViewModel: ObservableObject {
             try await returnVehicleAnnotations(lineNumber: lineNumber)
             let newAnnotations = vehicleAnnotations
             let existingAnnotations = mapView.annotations.compactMap { $0 as? CustomAnnotation }
-
+            
             for newAnnotation in newAnnotations {
                 if let existingAnnotation = existingAnnotations.first(where: { $0.vehicle?.vehicle_id == newAnnotation.vehicle?.vehicle_id }) {
                     UIView.animate(withDuration: 0.5) {
@@ -54,19 +54,19 @@ class MapViewModel: ObservableObject {
                         existingAnnotation.updateBearing(newAnnotation.vehicle!.bearing ?? 0)
                     }
                     if let annotationView = mapView.view(for: existingAnnotation) as? CustomVehicleView {
-                                        annotationView.configure(
-                                            lineNumber: existingAnnotation.vehicle?.line_number ?? "",
-                                            delay: existingAnnotation.vehicle?.punctuality ?? 0,
-                                            pointer: existingAnnotation.vehicle?.bearing ?? 0
-                                        )
+                        annotationView.configure(
+                            lineNumber: existingAnnotation.vehicle?.line_number ?? "",
+                            delay: existingAnnotation.vehicle?.punctuality ?? 0,
+                            pointer: existingAnnotation.vehicle?.bearing ?? 0
+                        )
                     }
                 }
                 let newAnnotationIDs = Set(newAnnotations.map { $0.vehicle?.vehicle_id })
-                            for existingAnnotation in existingAnnotations {
-                                if !newAnnotationIDs.contains(existingAnnotation.vehicle?.vehicle_id) {
-                                    mapView.removeAnnotation(existingAnnotation)
-                                }
-                            }
+                for existingAnnotation in existingAnnotations {
+                    if !newAnnotationIDs.contains(existingAnnotation.vehicle?.vehicle_id) {
+                        mapView.removeAnnotation(existingAnnotation)
+                    }
+                }
             }
             print("Updated locations data")
             
@@ -86,12 +86,12 @@ class MapViewModel: ObservableObject {
             throw error
         }
     }
-
+    
     private func returnVehicleAnnotations(lineNumber: String? = nil) async throws {
         do {
             let vehicleResponse: VehiclesResponse = try await APIClient.request(from: APIEndpoint.vehicles)
             let vehicles = vehicleResponse.data
-
+            
             let lineNumbers: [String]? = lineNumber?
                 .components(separatedBy: " ")
                 .map { $0.trimmingCharacters(in: .whitespaces) }
@@ -144,6 +144,43 @@ class MapViewModel: ObservableObject {
         } catch {
             print(error)
             throw error
+        }
+    }
+    
+    // MARK: - trajectory
+    func addRouteOnMap(on map: MKMapView, of lineID: Int) async throws {
+        do {
+            let polylines = try await decode(lineID)
+            await returnLineRoute(on: map, polylines: polylines)
+        } catch {
+            print("Error fetching data: \(error)")
+        }
+    }
+    
+    private func decode(_ lineID: Int) async throws -> [MKPolyline] {
+        let decodedData: GeoJSONResponse = try await APIClient.request(from: APIEndpoint.trajectories(lineID))
+        var polylines: [MKPolyline] = []
+        
+        for coordinate in decodedData.features {
+            let coordinates = coordinate.geometry.coordinates.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
+            let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+            polylines.append(polyline)
+        }
+        
+        return polylines
+    }
+    
+    private func returnLineRoute(on map: MKMapView, polylines: [MKPolyline]) async {
+        await MainActor.run {
+            map.addOverlays(polylines)
+            var routeRect = MKMapRect.null
+            
+            for polyline in polylines {
+                routeRect = routeRect.union(polyline.boundingMapRect)
+            }
+            
+            let edgePadding = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+            map.setVisibleMapRect(routeRect, edgePadding: edgePadding, animated: true)
         }
     }
 }

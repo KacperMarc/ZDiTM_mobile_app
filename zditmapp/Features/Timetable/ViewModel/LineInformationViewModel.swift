@@ -11,8 +11,7 @@ import MapKit
 
 class LineInformationViewModel:ObservableObject {
     
-    private let trajectoryVM = LineTrajectoryViewModel()
-    private var number: Int
+    var number: Int
     @Published var information: LineInformation?
     
     init(number: Int) {
@@ -21,9 +20,5 @@ class LineInformationViewModel:ObservableObject {
     
     func prepareData() async {
         self.information = try? await APIClient.request(from: APIEndpoint.lineInformation(number))
-    }
-    
-    func addRoute(on mapView: MKMapView) async {
-        try? await trajectoryVM.addRouteToMap(on: mapView, lineID: self.number)
     }
 }

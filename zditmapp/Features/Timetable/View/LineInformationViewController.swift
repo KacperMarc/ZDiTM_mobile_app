@@ -33,12 +33,12 @@ class LineInformationViewController: UIViewController {
     }()
     
     private lazy var lineLabel: InfoCardView = {
-        let view = InfoCardView(title: "Linia: \(lineNumber)", content: model.information?.rodzaj ?? "Brak rodzaju")
+        let view = InfoCardView(title: "Linia: \(lineNumber)", content: model.information?.type ?? "Brak rodzaju")
         return view
     }()
     
     private lazy var directionsLabel: InfoCardView = {
-        let view = InfoCardView(title: model.information?.kierunki ?? "Brak kierunków", content: model.information?.przebieg ?? "Brak przebiegu")
+        let view = InfoCardView(title: model.information?.directions ?? "Brak kierunków", content: model.information?.course ?? "Brak przebiegu")
         return view
     }()
     
@@ -95,7 +95,7 @@ class LineInformationViewController: UIViewController {
         addComponents(on: contentStackView)
         contentStackView.addArrangedSubview(mapView)
         Task {
-            await model.addRoute(on: mapView)
+            try await mapViewModel.addRouteOnMap(on: mapView, of: model.number)
         }
         NSLayoutConstraint.activate([
             mapView.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
@@ -137,10 +137,10 @@ class LineInformationViewController: UIViewController {
     }
     
     func returnStopsTowards() -> [UILabel]{
-        return model.information?.przystanki_do.map { returnStopLabel(stopName: $0) } ?? []
+        return model.information?.stopsTowards.map { returnStopLabel(stopName: $0) } ?? []
     }
     func returnStopsBackwards() -> [UILabel]{
-        return model.information?.przystanki_od.map { returnStopLabel(stopName: $0) } ?? []
+        return model.information?.stopsBackwards.map { returnStopLabel(stopName: $0) } ?? []
     }
 
     private func returnStopsStack() -> UIStackView {

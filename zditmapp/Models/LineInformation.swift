@@ -7,9 +7,9 @@
 import Foundation
 
 struct LineInformation: Codable {
-    let rodzaj: String
-    let kierunki: String
-    let przebieg: String
-    let przystanki_do:[String]
-    let przystanki_od: [String]
+    let type: String
+    let directions: String
+    let course: String
+    let stopsTowards:[String]
+    let stopsBackwards: [String]
 }
