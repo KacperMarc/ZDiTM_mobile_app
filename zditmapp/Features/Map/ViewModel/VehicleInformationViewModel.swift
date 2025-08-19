@@ -10,7 +10,7 @@ import Combine
 class VehicleInformationViewModel: ObservableObject {
     
     private var cancellables: Set<AnyCancellable> = []
-    private let mapViewModel: MapViewModel
+    let mapViewModel: MapViewModel
     private let vehicleId: Int
     
     //should return most important data (ID) and not string chain
@@ -38,6 +38,13 @@ class VehicleInformationViewModel: ObservableObject {
                         self?.updateData(from: annotation)
                     }
                     .store(in: &cancellables)
+    }
+    func showTrajectory() {
+        
+    }
+    
+    func showOtherVehicles() {
+        
     }
         
     func updateData(from annotation: CustomAnnotation) {

@@ -69,7 +69,6 @@ class MapViewModel: ObservableObject {
                 }
             }
             print("Updated locations data")
-            
         } catch {
             print("Error updating locations: \(error)")
         }

@@ -20,8 +20,8 @@ class LineInformationViewController: UIViewController {
         self.model = model
         self.lineNumber = lineNumber
         super.init(nibName: nil, bundle: nil)
-
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -32,20 +32,11 @@ class LineInformationViewController: UIViewController {
         return map
     }()
     
-    private lazy var lineLabel: InfoCardView = {
-        let view = InfoCardView(title: "Linia: \(lineNumber)", content: model.information?.type ?? "Brak rodzaju")
-        return view
-    }()
+    private lazy var lineLabel = InfoCardView(title: "Linia: \(lineNumber)", content: model.information?.type ?? "Brak rodzaju")
     
-    private lazy var directionsLabel: InfoCardView = {
-        let view = InfoCardView(title: model.information?.directions ?? "Brak kierunków", content: model.information?.course ?? "Brak przebiegu")
-        return view
-    }()
+    private lazy var directionsLabel = InfoCardView(title: "Linia: \(lineNumber)", content: model.information?.type ?? "Brak rodzaju")
     
-    private lazy var stopsStack: InfoCardView = {
-        let view = InfoCardView(title: "Przystanki na linii", content: "", viewComponent: returnStopsStack())
-        return view
-    }()
+    private lazy var stopsStack = InfoCardView(title: "Przystanki na linii", content: "", viewComponent: returnStopsStack())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,10 +128,11 @@ class LineInformationViewController: UIViewController {
     }
     
     func returnStopsTowards() -> [UILabel]{
-        return model.information?.stopsTowards.map { returnStopLabel(stopName: $0) } ?? []
+        model.information?.stopsTowards.map { returnStopLabel(stopName: $0) } ?? []
     }
+    
     func returnStopsBackwards() -> [UILabel]{
-        return model.information?.stopsBackwards.map { returnStopLabel(stopName: $0) } ?? []
+        model.information?.stopsBackwards.map { returnStopLabel(stopName: $0) } ?? []
     }
 
     private func returnStopsStack() -> UIStackView {
