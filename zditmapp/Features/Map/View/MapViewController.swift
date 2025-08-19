@@ -89,7 +89,7 @@ class MapViewController: UIViewController {
     private func addVehicleAnnotations() async throws {
         do {
             try await viewModel.addVehicleAnnotations(on: mapView)
-            viewModel.updateVehiclesOnMapView(self.mapView, lineNumber: searchLineTextField.text!)
+            viewModel.updateVehiclesOnMapView(mapView, lineNumber: searchLineTextField.text!)
         } catch {
             throw error
         }
@@ -98,7 +98,7 @@ class MapViewController: UIViewController {
     private func addRequestedAnnotations() async throws {
         do {
             try await viewModel.addVehicleAnnotations(on: mapView, lineNumber: searchLineTextField.text!)
-            viewModel.updateVehiclesOnMapView(self.mapView, lineNumber: searchLineTextField.text!)
+            viewModel.updateVehiclesOnMapView(mapView, lineNumber: searchLineTextField.text!)
         } catch {
             throw error
         }

@@ -19,6 +19,7 @@
      private var cardView: UIView!
      private var infoStackView: UIStackView!
      
+     //make a tab
      private var lineRow: InfoRowView!
      private var currentStopRow: InfoRowView!
      private var delayRow: InfoRowView!

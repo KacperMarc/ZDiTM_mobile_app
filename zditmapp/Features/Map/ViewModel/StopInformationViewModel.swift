@@ -26,9 +26,8 @@ class StopInformationViewModel: ObservableObject {
     func returnDepartureTable() async throws {
         do{
             let departureTable: DepartureTable = try await APIClient.request(from: APIEndpoint.table(stopNumber))
-            DispatchQueue.main.async {
-                self.departureTable = departureTable
-            }
+            self.departureTable = departureTable
+            
         }
         catch{
             print(error)

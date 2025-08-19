@@ -14,7 +14,7 @@ class TimetableViewModel: ObservableObject {
 
     func addSection(on view: UIStackView, onButtonTap: @escaping (String, Int) -> Void) async {
         print("called addSection")
-        await returnMappedLines {}
+        await returnMappedLines()
         DispatchQueue.main.async {
             for (category, lines) in self.mappedLines {
                 let sectionView = self.createSection(title: category, lines: lines, onButtonTap: onButtonTap)
@@ -23,13 +23,13 @@ class TimetableViewModel: ObservableObject {
         }
     }
     
-    func returnMappedLines(completion: @escaping () -> Void) async {
+    func returnMappedLines() async {
         do {
             let linesResponse: LinesResponse = try await APIClient.request(from: APIEndpoint.lines)
             let lines = linesResponse.data
             print("calledFetch")
 
-            DispatchQueue.main.async {
+            DispatchQueue.global(qos: .background).async {
                 self.mappedLines = [
                     "Tramwaje": lines.filter {
                                 if let number = Int($0.number) {
@@ -60,7 +60,6 @@ class TimetableViewModel: ObservableObject {
                                 return false
                             }
                 ]
-                completion()
             }
         } catch {
             print("Błąd podczas pobierania danych: \(error)")

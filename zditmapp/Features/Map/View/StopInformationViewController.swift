@@ -268,14 +268,13 @@ class StopInformationViewController: UIViewController {
     }
     
     private func showError(_ message: String) {
-        DispatchQueue.main.async {
-            self.errorLabel.text = "Błąd: \(message)\n\nSpróbuj ponownie później"
-            self.errorLabel.isHidden = false
-            self.tableView.isHidden = true
-            self.noDeparturesLabel.isHidden = true
-            self.messageLabel.isHidden = true
-            self.isLoading = false
-        }
+        errorLabel.text = "Błąd: \(message)\n\nSpróbuj ponownie później"
+        errorLabel.isHidden = false
+        tableView.isHidden = true
+        noDeparturesLabel.isHidden = true
+        messageLabel.isHidden = true
+        isLoading = false
+        
     }
     
     @objc private func refreshTapped() {
